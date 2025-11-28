@@ -1,0 +1,82 @@
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: sans-serif;
+}
+
+/* 准心：必须允许点击穿透，否则你点不中屏幕正中央 */
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+
+    /* 👇 这一行是关键！没有它，你点十字星时就是点在了 div 上，而不是游戏里 */
+    pointer-events: none;
+
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    z-index: 10;
+    user-select: none; /* 防止选中文字 */
+}
+
+/* 模态框背景 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+/* 模态框内容：这里必须恢复点击，否则点不了关闭按钮 */
+.modal {
+    pointer-events: auto; /* 👇 恢复内容区域的点击 */
+    background: white;
+    padding: 40px;
+    width: 500px;
+    max-width: 80%;
+    border-radius: 12px;
+    position: relative;
+    text-align: left;
+}
+.modal img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
